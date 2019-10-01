@@ -1,3 +1,3 @@
 # config.ru (run with rackup)
-require './app'
+require_relative "./app"
 run Battle
