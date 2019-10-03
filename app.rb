@@ -7,6 +7,10 @@ class Battle < Sinatra::Base
 
 enable :sessions
 
+  before do
+    @game = Game.instance
+  end
+
   get '/' do
     erb(:index)
   end
@@ -14,26 +18,34 @@ enable :sessions
   post '/names' do
     player_1 = Player.new(params[:player_1])
     player_2 = Player.new(params[:player_2])
-    $game = Game.new(player_1, player_2)
-    session[:header] = "#{$game.player_1.name} to start beating up #{$game.player_2.name}"
+    Game.create(player_1, player_2)
     redirect '/play'
   end
 
   get '/play' do
-    @player_1 = $game.player_1.name
-    @player_2 = $game.player_2.name
-    @player_1_HP = $game.player_1.hp
-    @player_2_HP = $game.player_2.hp
-    @header = session[:header]
+    if @game.game_over?
+      redirect '/game_over'
+    end
     erb(:play)
   end
 
-  get '/attack' do
-    # players = [$player_1, $player_2]
-    $game.attack($game.player_2)
-    session[:header] = "#{$game.player_1.name} attacks #{$game.player_2.name}"
-    redirect '/play'
+  post '/attack' do
+    Attack.new.attack(@game.players.last, (params.values[0]))
+    if @game.game_over?
+      redirect '/game_over'
+    else
+      @game.switch_turn
+      redirect '/play'
+    end
   end
+
+  get '/game_over' do
+    unless @game.game_over?
+      redirect '/play'
+    end
+    erb(:game_over)
+  end
+
   # start the server if ruby file executed directly
   run! if app_file == $0
 

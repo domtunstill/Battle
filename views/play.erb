@@ -31,12 +31,19 @@
 
   <div class="center"><h1>The Ultimate Battle</h1>
 
-  <h1> <%= @player_1 %> vs <%= @player_2 %> </h1>
-  <h2><%= @header %></h2>
-  <h3><%= @player_1 %>: <%= @player_1_HP %>HP <%= @player_2 %>: <%= @player_2_HP %>HP </h3>
+  <h1> <%= @game.player_1.name %> vs <%= @game.player_2.name %> </h1>
+  <!-- <h2><%= @game.move_text %></h2> -->
+  <h2><%= @game.action_text %></h2>
+  <h3><%= @game.player_1.name %>: <%= @game.player_1.hp %>HP <%= @game.player_2.name %>: <%= @game.player_2.hp %>HP </h3>
 
-  <form action="/attack" method="get">
-    <input type="submit" value="Attack!">
+  <form action="/attack" method="post">
+    <input type="submit" value="Punch!" name="Punch!">
+  </form>
+  <form action="/attack" method="post">
+    <input type="submit" value="Kick!" name="Kick!">
+  </form>
+  <form action="/attack" method="post">
+    <input type="submit" value="Special!" name="Special!">
   </form>
 
   </div>
