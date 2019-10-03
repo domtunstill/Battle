@@ -1,5 +1,51 @@
-<form action="/names" method="post">
-  <input type="text" name="player_1">
-  <input type="text" name="player_2">
-  <input type="submit" value="Submit">
-</form>
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The Ultimate Battle</title>
+  <meta name="description" content="Battle game">
+
+  <style>
+  body {
+    background-image: url(https://bit.ly/2oos9Xy);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    margin-top: 30px;
+    width: 100%;
+  }
+  h1 { color: white;
+  }
+  .center {
+    text-align: center;
+  }
+  </style>
+
+</head>
+
+<body>
+  <div class="center"><h1>The Ultimate Battle</h1>
+
+  <form action="/names" method="post">
+
+    <select name="player_1Select" id="player_1Select">
+      <option value="King">King</option>
+      <option value="Law">Law</option>
+      <option value="Eddy">Eddy</option>
+      <option value="Yoshimitsu">Yoshimitsu</option>
+    </select>
+
+    <select name="player_2" id="player_2">
+      <option value="King">King</option>
+      <option value="Law">Law</option>
+      <option value="Eddy">Eddy</option>
+      <option value="Yoshimitsu">Yoshimitsu</option>
+    </select>
+
+    <input type="submit" value="Submit">
+
+  </form></div>
+</body>
+</html>

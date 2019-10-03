@@ -3,4 +3,5 @@ feature 'Testing names' do
     sign_in_and_play
     expect(page).to have_content 'Brad vs Dom'
   end
+
 end
