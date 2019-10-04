@@ -30,7 +30,9 @@ enable :sessions
   end
 
   post '/attack' do
-    Attack.new.attack(@game.players.last, (params.values[0]))
+    attack = Attack.new
+    attack.attack(@game.players,(params.values[0]))
+    @game.last_action((params.values[0]), attack.damage)
     if @game.game_over?
       redirect '/game_over'
     else

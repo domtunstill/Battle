@@ -1,22 +1,25 @@
 
 class Attack
 
+  attr_reader :damage
+
   def initialize
-    @move = {"Punch!" => rand(5..20), "Kick!" => rand(10..35), "Special!" => rand(25..70)}
+    @move = {"Punch!" => rand(5..15), "Kick!" => rand(15..40), "Special!" => rand(40..80)}
     @move_chance = {"Punch!" => 1, "Kick!" => rand(2), "Special!" => rand(3)}
+    @damage = 0
   end
 
-  def damage(move)
-    if @move_chance[move] == 1
-      @damage = @move[move]
-    else @damage = 0
+  def attack(players, move)
+    calc_damage(move)
+    players.last.attacked(@damage)
+  end
+
+  private
+
+    def calc_damage(move)
+      if @move_chance[move] == 1
+        @damage = @move[move]
+      end
     end
-  end
-
-  def attack(player, move)
-    damage(move)
-    player.attacked(@damage)
-    # @action_text = "#{@players.first.name} turn to beat up #{@players.last.name}"
-  end
 
 end

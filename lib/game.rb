@@ -16,13 +16,17 @@ class Game
   def initialize(player_1, player_2)
     @player_1 = player_1
     @player_2 = player_2
-    @players = [@player_1, @player_2]
-    @action_text = "#{@player_1.name} to beat up #{@player_2.name}"
+    @players = [@player_1, @player_2].shuffle!
+    @action_text = "#{@players.first.name}'s turn to beat up #{@players.last.name}"
+  end
+
+  def last_action(move, damage)
+    @move_text = "#{@players.first.name} used #{move} and dealt #{damage} damage on #{@players.last.name}!"
   end
 
   def switch_turn
     @players.reverse!
-    @action_text = "#{@players.first.name} turn to beat up #{@players.last.name}"
+    @action_text = "#{@players.first.name}'s turn to beat up #{@players.last.name}"
   end
 
   def game_over?

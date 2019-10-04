@@ -1,3 +1,8 @@
+require 'simplecov'
+require 'simplecov-console'
+SimpleCov.formatter = SimpleCov.formatter = SimpleCov::Formatter::Console
+SimpleCov.start
+
 ENV['RACK_ENV'] = 'test'
 
 # require our Sinatra app file

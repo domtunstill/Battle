@@ -14,8 +14,7 @@ describe Player do
   end
 
   it 'attacks the other player' do
-    allow(subject).to receive(:rand).and_return(10)
-    expect{ subject.attacked }.to change { subject.hp }.by (-10)
+    expect{ subject.attacked(10) }.to change { subject.hp }.by (-10)
   end
 
 end
