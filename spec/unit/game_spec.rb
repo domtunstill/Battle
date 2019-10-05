@@ -5,17 +5,17 @@ describe Game do
   let(:name) { :name }
   let(:player_1) { double :player }
   let(:player_2) { double :player }
-  # Game.create(player_1,player_2)
-  subject { Game.create(player_1,player_2)}
-  let(:game) { Game.instance }
+  game = nil
+
 
   before do
-    allow(player_1).to receive(:name)
-    allow(player_2).to receive(:name)
+    allow(player_1).to receive(:name).and_return(player_1)
+    allow(player_2).to receive(:name).and_return(player_2)
+    Game.create(player_1,player_2)
+    game = Game.instance
   end
 
   it 'initializes with player 1' do
-    p game.player_1
     expect(game.player_1).to eq player_1
   end
 
@@ -28,15 +28,13 @@ describe Game do
   end
 
   it 'saves the last_action as a string for user feedback' do
-    p game.players
     game.last_action('Punch!', 10)
-    expect(game.move_text).to eq "player_1 used Punch! and dealt 10 damage on player_2!"
+    expect(game.move_text).to eq "#{player_1} used Punch! and dealt 10 damage on #{player_2}!"
   end
 
   it 'switches turns for the players' do
-    p game.players
     game.switch_turn
-    expect(game.action_text).to eq "player_1's turn to beat up player_2"
+    expect(game.action_text).to eq "#{player_1}'s turn to beat up #{player_2}"
   end
 
   it 'registers game_over? once a player reaches 0 HP or less' do
